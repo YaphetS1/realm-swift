@@ -156,7 +156,10 @@ class SwiftUITests: XCTestCase {
         app.buttons["addReminder"].tap()
         XCTAssertEqual(realm.objects(ReminderList.self).first!.name, "test name")
 
+        // Tapping once on the back button seems to be working incorrectly for Xcode 13.2.1, tapping it twice seems to fix the issue
         app.buttons["Next"].tap()
+        app.buttons["Next"].tap()
+
         app.buttons["Delete"].tap()
 
         XCTAssertEqual(app.textFields["name"].value as? String, "test name")

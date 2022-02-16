@@ -232,7 +232,6 @@ private class ObservableStorage<ObservedType>: ObservableObject where ObservedTy
         willSet {
             if newValue != value {
                 objectWillChange.subscribers.forEach {
-                    $0.receive(completion: .finished)
                     $0.receive(subscription: ObservationSubscription(token: newValue._observe(keyPaths, $0)))
                 }
                 objectWillChange.send()
@@ -1598,7 +1597,7 @@ extension View {
                           prompt: prompt,
                           suggestions: suggestions)
     }
-    
+
     private func filterCollection<T: ObjectBase>(_ collection: ObservedResults<T>, for text: String, on keyPath: KeyPath<T, String>) {
         DispatchQueue.main.async {
             collection.searchText(text, on: keyPath)
