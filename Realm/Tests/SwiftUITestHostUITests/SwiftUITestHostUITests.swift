@@ -92,16 +92,14 @@ class SwiftUITests: XCTestCase {
         app.buttons["picker"].tap()
         app.tables.switches["medium"].tap()
         XCTAssertEqual(myReminder.priority, .medium)
-        // Tapping once on the back button seems to be working incorrectly for Xcode 13.2.1, tapping it twice seems to fix the issue
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         // MARK: Test Move
         app.buttons["addReminder"].tap()
         XCTAssertEqual(realm.objects(ReminderList.self).first!.reminders.first!.title, "My Reminder")
         XCTAssertEqual(realm.objects(ReminderList.self).first!.reminders[1].title, "")
-        // Tapping once on the back button seems to be working incorrectly for Xcode 13.2.1, tapping it twice seems to fix the issue
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         app.buttons["Edit"].tap()
@@ -156,10 +154,7 @@ class SwiftUITests: XCTestCase {
         app.buttons["addReminder"].tap()
         XCTAssertEqual(realm.objects(ReminderList.self).first!.name, "test name")
 
-        // Tapping once on the back button seems to be working incorrectly for Xcode 13.2.1, tapping it twice seems to fix the issue
         app.buttons["Next"].tap()
-        app.buttons["Next"].tap()
-
         app.buttons["Delete"].tap()
 
         XCTAssertEqual(app.textFields["name"].value as? String, "test name")
