@@ -92,14 +92,12 @@ class SwiftUITests: XCTestCase {
         app.buttons["picker"].tap()
         app.tables.switches["medium"].tap()
         XCTAssertEqual(myReminder.priority, .medium)
-
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         // MARK: Test Move
         app.buttons["addReminder"].tap()
         XCTAssertEqual(realm.objects(ReminderList.self).first!.reminders.first!.title, "My Reminder")
         XCTAssertEqual(realm.objects(ReminderList.self).first!.reminders[1].title, "")
-
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         app.buttons["Edit"].tap()
